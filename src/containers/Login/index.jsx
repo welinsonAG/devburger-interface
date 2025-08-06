@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import { api} from "../../services/api";
 import {Container, Form, InputContainer, LeftContainer, RightContainer, Title, Link,} from "./styles";
-import Logo from '../../assets/logo.svg'
+import Logo from '../../assets/logo.png'
 import { Button } from "../../components/Button";
 
 
@@ -31,7 +31,7 @@ export function Login (){
 
   const onSubmit = async (data) => {
     try {  
-const response = await toast.promise( 
+const { data: { token }, }= await toast.promise( 
  api.post('/sessions', {
   email: data.email,
   password: data.password,
@@ -49,9 +49,12 @@ const response = await toast.promise(
       },
       
       error: 'Email ou Senha Incorretos 🤯',
-    }
+
+    },
+   
  );
-console.log(response);
+ 
+ localStorage.setItem('token', token)
 
   } 
 catch (error){
