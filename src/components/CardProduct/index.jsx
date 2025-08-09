@@ -4,7 +4,7 @@ import { CardImage, Container } from "./styles";
 
 
 export function CardProduct({product}){
-    console.log(product);
+  
     
   return(
     <Container>

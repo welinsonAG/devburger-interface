@@ -53,6 +53,7 @@ font-weight: bold;
     height: 4px;
     background-color: #61A120;
 
+
     left: calc(50% - 28px);
 }
 `;

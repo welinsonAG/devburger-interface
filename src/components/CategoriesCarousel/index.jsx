@@ -18,6 +18,7 @@ useEffect(() => {
     }
     loadCategories()
 },[]);
+
 const responsive = {
   superLargeDesktop: {
    
