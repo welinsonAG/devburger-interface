@@ -10,7 +10,7 @@ export function CardProduct({product}){
     <Container>
 
        
-        <CardImage src= {product.url} alt={product.name}/>
+        <CardImage src= {product.url } alt={product.name}/>
         <div>
             <p>{product.name}</p>
             <strong>{product.currencyValue}</strong>
@@ -20,6 +20,6 @@ export function CardProduct({product}){
     </Container>
   )  
 }
-CardProduct.protoTypes = {
+CardProduct.protTypes = {
     product: PropTypes.object,
 }

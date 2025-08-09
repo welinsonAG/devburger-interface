@@ -42,11 +42,14 @@ div{
 }
 `;
 
+
 export const CardImage = styled.img`
-height: 100px;
-position: absolute;
-top: -50px;
-margin-top: 40px;
-
-
+  height: 100px;
+ 
+  top: -30px; /* diminua de -50px para -30px */
+  left: 50%;   /* centraliza horizontalmente */
+  transform: translateX(-50%);
+  cursor: pointer;
 `;
+
+
