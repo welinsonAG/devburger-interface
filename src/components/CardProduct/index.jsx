@@ -20,6 +20,6 @@ export function CardProduct({product}){
     </Container>
   )  
 }
-CardProduct.protTypes = {
+CardProduct.propTypes = {
     product: PropTypes.object,
 }

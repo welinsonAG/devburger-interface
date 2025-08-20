@@ -16,7 +16,7 @@ export function OffersCarousel() {
       const { data } = await api.get('/products');
 
       const onlyOffers = data
-        .filter((product) => product.offer)
+        .filter((product) => product.offer )
         .map((product) => ({
           currencyValue: formatPrice(product.price),
           ...product,
@@ -49,7 +49,7 @@ export function OffersCarousel() {
 
   return (
     <Container>
-      <Title>OFERTAS DO DIA</Title>
+      <Title>Ofertas Do Dia</Title>
       <Carousel
         responsive={responsive}
         infinite={true}

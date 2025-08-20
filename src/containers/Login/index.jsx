@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { toast } from "react-toastify";
 
 import { api} from "../../services/api";
-import {Container, Form, InputContainer, LeftContainer, RightContainer, Title, Link,} from "./styles";
+import {Container, Form, InputContainer, LeftContainer, RightContainer, Title, Link} from "./styles";
 import Logo from '../../assets/logo.png'
 import { Button } from "../../components/Button";
 

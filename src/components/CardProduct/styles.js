@@ -6,7 +6,7 @@ display:flex;
 flex-direction:column;
 align-items: center;
 gap:40px;
-padding: 45px;
+padding: 20px;
 border-radius:8px;
 background-color: #ffffff;
 cursor: grab;
@@ -18,8 +18,8 @@ div{
     height: 80px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 5px;
 
 
     p{
@@ -45,9 +45,9 @@ div{
 
 export const CardImage = styled.img`
   height: 100px;
- 
-  top: -30px; /* diminua de -50px para -30px */
-  left: 50%;   /* centraliza horizontalmente */
+ position:absolute;
+  top: -40px; 
+  left: 50%;   
   transform: translateX(-50%);
   cursor: pointer;
 `;

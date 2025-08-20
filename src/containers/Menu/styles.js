@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { Link } from "react-router-dom";
 import BannerHamburger from "../../assets/banner-hamburger.svg";
 import Background from "../../assets/background.png";
@@ -57,16 +58,17 @@ export const CategoryButton = styled(Link)`
   text-decoration: none;
   cursor: pointer;
   background: none;
-  color: ${({ active }) => (active ? "#d6336c" : "#9758a6")};
+  color:${(props) => (props.$isActiveCategory ? '#9758a6 ' :'#696969')};
   font-size: 24px;
   font-weight: 500;
   padding-bottom: 5px;
-  line-height: 20px;
-  border-bottom: 3px solid ${({ active }) => (active ? "#d6336c" : "#9758a6")};
+  line-height: 20px; 
+  border: none;
+  border-bottom: ${(props) => props.$isActiveCategory && ' 3px solid #9758a6 '};
 
   &:hover {
-    color: #d6336c;
-    border-bottom-color: #d6336c;
+    color: #ff2fd1;
+    border-bottom-color: #00ff00;
   }
 `;
 

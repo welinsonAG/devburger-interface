@@ -39,6 +39,8 @@ padding-bottom: 12px;
 position: relative;
 text-align: center;
 margin: 70px, 0;
+margin-top: 20px ;
+margin-bottom: 40px;
 font-weight: bold;
 
 
