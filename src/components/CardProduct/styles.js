@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-display:flex;
+display: flex;
 flex-direction:column;
 align-items: center;
 gap:40px;
@@ -45,7 +45,7 @@ div{
 
 export const CardImage = styled.img`
   height: 100px;
- position:absolute;
+ position: absolute;
   top: -40px; 
   left: 50%;   
   transform: translateX(-50%);

@@ -4,7 +4,9 @@ import { Banner, Container  } from "./styles"
 import { useUser } from "../../hooks/UserContext"
 
 export function Home(){
-console.log(useUser);
+    
+console.log(useUser()); 
+
 
     return(
         <main>

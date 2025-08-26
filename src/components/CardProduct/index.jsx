@@ -1,10 +1,12 @@
+
 import PropTypes from "prop-types";
 import { CartButton } from "../CartButton";
 import { CardImage, Container } from "./styles";
-
+import { formatPrice } from "../../utils/formatPrice";
 
 export function CardProduct({product}){
   
+ 
     
   return(
     <Container>
@@ -13,7 +15,7 @@ export function CardProduct({product}){
         <CardImage src= {product.url } alt={product.name}/>
         <div>
             <p>{product.name}</p>
-            <strong>{product.currencyValue}</strong>
+          <strong>{formatPrice(product.price)}</strong>
         </div>
          <CartButton></CartButton> 
         
@@ -21,5 +23,5 @@ export function CardProduct({product}){
   )  
 }
 CardProduct.propTypes = {
-    product: PropTypes.object,
+    product: PropTypes.object.isRequired,
 }

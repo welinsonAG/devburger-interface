@@ -8,6 +8,7 @@ import { Menu } from "../containers/Menu";
 
 
 export const router = createBrowserRouter ([
+    
      {
         path: '/',
         element: <Home />,   
@@ -31,5 +32,5 @@ export const router = createBrowserRouter ([
         path: '/home',
         element: <Home />,   
     },
-    
+  
 ]);
