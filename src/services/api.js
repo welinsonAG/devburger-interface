@@ -1,33 +1,28 @@
 import axios from "axios";
 
-// Criação da instância do Axios
+export async function putUserData(user) {
+  return api.put(`/users/${user.id}`, user);
+}
+
 export const api = axios.create({
-    baseURL: 'http://localhost:3001',
+  baseURL: "http://localhost:3001",
 });
 
 // Interceptor para incluir o token de autenticação nas requisições
-api.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
+api.interceptors.request.use(
+  (config) => {
+    const userData = localStorage.getItem("devburger:userData");
 
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-    }
+    const token = userData && JSON.parse(userData).token;
 
+    if (token){ 
+      config.headers.Authorization = `Bearer ${token}`;
+   
+  }
     return config;
-}, (error) => {
-    // Manipulação de erros do interceptor
-    return Promise.reject(error);
-});
+  },
+ (error) => {  
+   return Promise.reject(error);
+ }
+);
 
-// Exemplo de requisição para obter categorias
-const fetchCategories = async () => {
-    try {
-        const response = await api.get('/categories');
-        console.log('Categorias:', response.data);
-    } catch (error) {
-        console.error('Erro ao buscar categorias:', error.response ? error.response.data : error.message);
-    }
-};
-
-// Chamada da função para buscar categorias
-fetchCategories();

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from 'yup';
 import { toast } from "react-toastify";
 
+import { useUser } from "../../hooks/UserContext";
 import { api} from "../../services/api";
 import {Container, Form, InputContainer, LeftContainer, RightContainer, Title, Link} from "./styles";
 import Logo from '../../assets/logo.png'
@@ -12,6 +13,8 @@ import { Button } from "../../components/Button";
 
 export function Login (){
   const navigate = useNavigate();
+  const {putUserData} = useUser()
+
   const schema = yup
   .object({
     email: yup.string().email('Digite um e-mail válido').required('O e-mail é obrigatório'),
@@ -27,11 +30,10 @@ export function Login (){
     resolver: yupResolver(schema),
   });
 
-  console.log(errors)
 
   const onSubmit = async (data) => {
     try {  
-const { data: { token }, }= await toast.promise( 
+const {data: userData} = await toast.promise( 
  api.post('/sessions', {
   email: data.email,
   password: data.password,
@@ -54,7 +56,8 @@ const { data: { token }, }= await toast.promise(
    
  );
  
- localStorage.setItem('token', token)
+   putUserData(userData)
+navigate("/")
 
   } 
 catch (error){
@@ -77,7 +80,7 @@ return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <InputContainer>
             <label>Email</label>
-            <input type=" email" {...register("email")}/>
+            <input type="email" {...register("email")}/>
             <p>{errors?.email?.message}</p>
             </InputContainer>
 

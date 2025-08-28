@@ -30,30 +30,44 @@ export function Menu() {
   const [activeCategory, setActiveCategory] = useState(initialCategory);
 
   // Carregar categorias e produtos
-  useEffect(() => {
-    async function loadCategories() {
+useEffect(() => {
+  async function loadCategories() {
+    try {
       const { data } = await api.get("/categories");
-      console.log("Categoria inicial:", initialCategory);
       console.log("Categorias recebidas:", data);
+
       const newCategories = [{ id: 0, name: "Todas" }, ...data];
       setCategories(newCategories);
+    } catch (error) {
+      console.error("Erro ao carregar categorias:", error);
+      if (error.response?.status === 401) {
+        navigate("/login"); // redireciona se não tiver token válido
+      }
     }
+  }
 
-    async function loadProducts() {
+  async function loadProducts() {
+    try {
       const { data } = await api.get("/products");
-      console.log("Produtos recebidos ", data); // Verifique os dados aqui
+      console.log("Produtos recebidos:", data);
+
       const newProducts = data.map((product) => ({
         currencyValue: formatPrice(product.price),
         ...product,
       }));
 
       setProducts(newProducts);
+    } catch (error) {
+      console.error("Erro ao carregar produtos:", error);
+      if (error.response?.status === 401) {
+        navigate("/login");
+      }
     }
+  }
 
-    loadCategories();
-    loadProducts();
-  }, []);
-
+  loadCategories();
+  loadProducts();
+}, [navigate]);
   // Atualizar produtos filtrados quando muda categoria ou produtos
   useEffect(() => {
     if (activeCategory === 0) {

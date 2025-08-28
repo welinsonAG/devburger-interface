@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Header } from "../components/Header";
 
 import { Home } from "../containers/Home";
 import { Login } from "../containers/Login";
@@ -10,9 +11,15 @@ import { Menu } from "../containers/Menu";
 export const router = createBrowserRouter ([
     
      {
-        path: '/',
-        element: <Home />,   
+         path: '/',
+        element:(
+             <> 
+        <Header />
+        <Home />
+          </>  
+        ) ,
     },
+    
     
     {
         path: '/login',
@@ -26,7 +33,13 @@ export const router = createBrowserRouter ([
  
      {
         path: '/cardapio',
-        element: <Menu />,   
+        element: (
+             <> 
+        <Header />
+        <Menu />
+          </>  
+        ) ,
+     
     },
   {
         path: '/home',
