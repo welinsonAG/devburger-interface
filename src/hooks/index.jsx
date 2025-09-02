@@ -1,7 +1,8 @@
 import { UserProvider } from "./UserContext";
-import { putUserData } from "../services/api"
+
+import { CartProvider } from "./CartContext";
 const AppProvider = ({ children }) => {
-  return (  <UserProvider>{ children }</UserProvider>
+  return (  <UserProvider> <CartProvider></CartProvider>{ children }</UserProvider>
     );
 };
 
