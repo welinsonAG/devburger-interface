@@ -38,7 +38,7 @@ width: 100%;
 
 `;
 
-export const ProducTotalPrice = styled.td`
+export const ProducTotalPrice = styled.span`
 font-weight: bold;
 `;
 

@@ -9,3 +9,4 @@ export * from './Button'
 export * from './Table'
 export * from './CartResume'
 export * from './CartItems'
+export { default as CheckoutForm } from './Stripe/CheckoutForm';

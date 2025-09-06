@@ -18,8 +18,8 @@ export function CartItems() {
   console.log(cartProducts);
 
   return (
-    <Table.Root>  
-       <Table.Header>
+    <Table.Root>
+      <Table.Header>
         <Table.Tr>
           <Table.Th></Table.Th>
           <Table.Th>Itens</Table.Th>
@@ -32,13 +32,14 @@ export function CartItems() {
 
       <Table.Body>
         {cartProducts?.length ? (
-          cartProducts.map((product) => (
+          cartProducts.map((product) => ( 
             <Table.Tr key={product.id}>
+              
               <Table.Td>
-                <ProductImage src={product.url} alt={product.name}/> 
+                <ProductImage src={product.url} alt={product.name} />
               </Table.Td>
               <Table.Td>{product.name}</Table.Td>
-              <Table.Td>{product.currencyValue}</Table.Td>
+              <Table.Td>{formatPrice(product.quantity * product.price)}</Table.Td>
               <Table.Td>
                 <ButtonGroup>
                   <button onClick={() => decreaseProduct(product.id)}>-</button>
@@ -62,11 +63,12 @@ export function CartItems() {
           ))
         ) : (
           <Table.Tr>
-            <EmptyCart colSpan={6}>Carrinho Vasio</EmptyCart>
+          
+              <EmptyCart colSpan={6}>Carrinho Vazio</EmptyCart>
+           
           </Table.Tr>
         )}
-          
-      </Table.Body>  
+      </Table.Body>
     </Table.Root>
   );
 }
