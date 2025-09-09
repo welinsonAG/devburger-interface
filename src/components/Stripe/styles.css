@@ -9,7 +9,15 @@
   width: 100vw;
   
 }
-
+p{
+  margin-left: 60px;
+  align-items: center;
+  width: 100vh;
+}
+ #dpm-integration-checker{
+color: #0055DE;
+text-decoration: none;
+}
 .container{
   display: flex;
   flex-direction: column;
