@@ -14,7 +14,6 @@ export const Container = styled.div`
   }
 
   .container-top {
-    display: grid;
     grid-gap: 10px 30%;
     grid-template-areas:
       'title title'
@@ -42,7 +41,7 @@ export const Container = styled.div`
 
     .items-price {
       grid-area: items-price;
-      padding-right: 20px;
+      padding-left: 199px;
     }
 
     .delivery-tax {
@@ -52,7 +51,7 @@ export const Container = styled.div`
 
     .delivery-tax-price {
       grid-area: delivery-tax-price;
-      padding-right: 20px;
+      padding-left: 56%;
     }
   }
 
@@ -62,13 +61,10 @@ export const Container = styled.div`
     font-size: 20px;
     font-weight: 700;
     margin-top: 24px;
-    padding-right: 20px;
+    padding: 20px;
 
     * {
-   
-    font-weight: 700;
-    padding-left: 20px;
+      font-weight: 700;
+    }
   }
-  }
-   
 `;

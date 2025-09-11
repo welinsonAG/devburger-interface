@@ -15,12 +15,19 @@ export function Checkout() {
     useEffect(() => {
         console.log('🎯 location.state:', location.state);
          console.log('🎯 clientSecret (localStorage):', localStorage.getItem('stripeClientSecret'));
-    })
+    }, [location.state]);
+
     if (!clientSecret) {
         console.error('xxxx clientSecret não está definido:', location.state);
-        return <div> Não foi possível processar seu pedido. Por favor, volte e tente novamente.</div>;
+        return (
+        <div> Não foi possível processar seu pedido. Por favor, volte e tente novamente.</div>
+        );
     }
 
+ const options = {
+    clientSecret,
+    appearance: { theme: "stripe" },
+  };
     
 
     return (

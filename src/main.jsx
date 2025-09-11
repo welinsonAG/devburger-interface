@@ -9,9 +9,11 @@ import AppProvider from './hooks';
 import { router } from './routes';
 import GlobalStyles from './styles/globalStyles';
 import { CartProvider } from './hooks/CartContext';
-
+import { ThemeProvider } from 'styled-components';
+import { standardTheme } from './styles/themes/standard'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <ThemeProvider theme={standardTheme}>  
     <AppProvider>
       <CartProvider>
         <Elements stripe={stripePromise}>
@@ -21,5 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ToastContainer autoClose={2000} theme="colored" />
       </CartProvider>
     </AppProvider>
+    </ThemeProvider>
   </React.StrictMode>,
 );

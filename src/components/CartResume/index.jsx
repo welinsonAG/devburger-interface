@@ -56,31 +56,6 @@ export function CartResume() {
       });
     }
 
-    /*  try {
-      const { status } = await api.post(
-        '/orders',
-        { products },
-        {
-          validateStatus: () => true,
-        },
-      );
-
-      if (status === 200 || status === 201) {
-        
-        setTimeout(() => {
-          navigate('/');
-        }, 2000);
-        clearCart()
-        
-        toast.success('Pedido  Criada com Sucesso Aproveite!');
-      } else if (status === 409) {
-        toast.error('Falha em Realizar Seu Pedido!');
-      } else {
-        throw new Error();
-      }
-    } catch (error) {
-      toast.error('😭 Falha no Sistema! Tente novamente');
-    } */
   };
 
   return (

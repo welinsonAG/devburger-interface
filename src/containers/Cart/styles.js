@@ -50,6 +50,6 @@ display: grid;
 grid-template-columns: 1fr 30%;
 max-width: 1280px;
 padding: 40px;
-margin: 0 auto;
+margin: 0  auto;
 gap:40px;
 `;

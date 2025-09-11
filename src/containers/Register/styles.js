@@ -58,7 +58,7 @@ p{
 export const Title = styled.h2`
 font-family: "Road Rage", sans-serif;
 font-size:40px;
-color: #9758A6;
+color: ${(props) => props.theme.purple};
 
 
 `;

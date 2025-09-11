@@ -61,7 +61,7 @@ font-size:40px;
 color: #fff;
 
 span{
-    color: #9758A6;
+    color: ${(props) => props.theme.purple};
     font-family: "Road Rage", sans-serif;
 }
 `;
