@@ -59,7 +59,7 @@ border-radius: 20px;
 `;
 
 export const CategoryButton = styled(Link)`
-color:#ffffff;
+color:${(props) => props.theme.white};
 background-color:rgba(0, 0, 0, 0.5 );
 padding: 10px 25px;
 border-radius:30px;
@@ -69,7 +69,7 @@ margin-top: 50px;
 text-decoration: none;
 
 &:hover {
-    background-color:#2811f2;
+    background-color:${(props) => props.theme.white};
 }
 `;
 

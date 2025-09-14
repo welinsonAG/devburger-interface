@@ -1,1 +1,51 @@
-import styled from "styled-components"; ${(props) => props.theme.darkPurple} ${(props) => props.theme.darkPurple}export const ProductImage = styled.img` ${(props) => props.theme.darkPurple}height: 80px; ${(props) => props.theme.darkPurple}width: 80px; ${(props) => props.theme.darkPurple}border-radius:16px; ${(props) => props.theme.darkPurple}`; ${(props) => props.theme.darkPurple} ${(props) => props.theme.darkPurple}export const  ButtonGroup= styled.div` ${(props) => props.theme.darkPurple}display: flex; ${(props) => props.theme.darkPurple}align-items: center; ${(props) => props.theme.darkPurple}gap: 12px; ${(props) => props.theme.darkPurple} ${(props) => props.theme.darkPurple}button{ ${(props) => props.theme.darkPurple}    display: flex; ${(props) => props.theme.darkPurple}    align-items: center; ${(props) => props.theme.darkPurple}    justify-content: center; ${(props) => props.theme.darkPurple}    height: 30px; ${(props) => props.theme.darkPurple}    width: 30px; ${(props) => props.theme.darkPurple}    color: #fff; ${(props) => props.theme.darkPurple}    border-radius: 4px; ${(props) => props.theme.darkPurple}    background-color: ${(props) => props.theme.purple}; ${(props) => props.theme.darkPurple}    transition: all 0.4s; ${(props) => props.theme.darkPurple}    border: none; ${(props) => props.theme.darkPurple} ${(props) => props.theme.darkPurple}    &:hover{ ${(props) => props.theme.darkPurple}        background-color: #6f357c; ${(props) => props.theme.darkPurple}    } ${(props) => props.theme.darkPurple}} ${(props) => props.theme.darkPurple}`; ${(props) => props.theme.darkPurple} ${(props) => props.theme.darkPurple}export const EmptyCart = styled.td` ${(props) => props.theme.darkPurple}font-size: 20px; ${(props) => props.theme.darkPurple}text-align: center; ${(props) => props.theme.darkPurple}font-weight: bold; ${(props) => props.theme.darkPurple}padding:20px; ${(props) => props.theme.darkPurple}width: 100%; ${(props) => props.theme.darkPurple} ${(props) => props.theme.darkPurple}`; ${(props) => props.theme.darkPurple} ${(props) => props.theme.darkPurple}export const ProducTotalPrice = styled.span` ${(props) => props.theme.darkPurple}font-weight: bold; ${(props) => props.theme.darkPurple}`; ${(props) => props.theme.darkPurple} ${(props) => props.theme.darkPurple}export const TrashImage= styled.img` ${(props) => props.theme.darkPurple}height: 20px; ${(props) => props.theme.darkPurple}width: 20px; ${(props) => props.theme.darkPurple}cursor: pointer; ${(props) => props.theme.darkPurple}`;
+import styled from "styled-components";
+
+export const ProductImage = styled.img`
+height: 80px;
+width: 80px;
+border-radius:16px;
+ object-fit: cover;
+`;
+
+export const  ButtonGroup= styled.div`
+display: flex;
+align-items: center;
+gap: 12px;
+
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    color:  ${(props) => props.theme.white};
+    border-radius: 4px;
+    background-color: ${(props) => props.theme.purple};
+    transition: all 0.4s;
+    border: none;
+
+    &:hover{
+        background-color: ${(props) => props.theme.secondDarkPurple};
+    }
+}
+`;
+
+export const EmptyCart = styled.td`
+font-size: 20px;
+text-align: center;
+font-weight: bold;
+padding:20px;
+width: 100%;
+
+`;
+
+export const ProducTotalPrice = styled.span`
+font-weight: bold;
+  
+`;
+
+export const TrashImage= styled.img`
+height: 20px;
+width: 20px;
+cursor: pointer;
+`;

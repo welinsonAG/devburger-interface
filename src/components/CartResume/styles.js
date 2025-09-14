@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.white};
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -9,11 +9,12 @@ export const Container = styled.div`
   margin-bottom: 20px;
 
   * {
-    color: #484848;
+    color: ${(props) => props.theme.secondBlack};
     font-weight: 500;
   }
 
   .container-top {
+   
     grid-gap: 10px 30%;
     grid-template-areas:
       'title title'
@@ -25,8 +26,8 @@ export const Container = styled.div`
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 20px;
-      background-color: #484848;
-      color: #fff;
+      background-color: ${(props) => props.theme.secondBlack};
+      color: ${(props) => props.theme.white};
       width: 100%;
       padding: 13px;
       text-align: center;
@@ -36,22 +37,23 @@ export const Container = styled.div`
 
     .items {
       grid-area: items;
-      padding-left: 20px;
+      padding-left: 10px;
     }
 
     .items-price {
       grid-area: items-price;
-      padding-left: 199px;
+      padding-left:196px;
     }
 
     .delivery-tax {
       grid-area: delivery-tax;
-      padding-left: 20px;
+      padding-left: 10px;
     }
 
     .delivery-tax-price {
       grid-area: delivery-tax-price;
-      padding-left: 56%;
+      padding-left: 196px;
+
     }
   }
 
@@ -61,10 +63,11 @@ export const Container = styled.div`
     font-size: 20px;
     font-weight: 700;
     margin-top: 24px;
-    padding: 20px;
+    padding: 22px;
 
     * {
       font-weight: 700;
-    }
+      
   }
+}
 `;

@@ -1,19 +1,17 @@
-import styled from "styled-components";
-
-import { Link } from "react-router-dom";
-import BannerHamburger from "../../assets/banner-hamburger.svg";
-import Background from "../../assets/background.png";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import BannerHamburger from '../../assets/banner-hamburger.svg';
+import Background from '../../assets/background.png';
 
 export const Container = styled.div`
   width: 100%;
-  min-height: 100vh;
-  background-color: #f0f0f0;
+  min-height: 100v;
+  background-color: ${(props) => props.theme.secondWhite};
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url('${Background}') ;
+   
 
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url('${Background}');
 `;
 
 export const Banner = styled.div`
@@ -25,15 +23,15 @@ export const Banner = styled.div`
   position: relative;
 
   background: url('${BannerHamburger}') no-repeat;
-  background-color: #1f1f1f;
+  background-color: ${(props) => props.theme.mainBlack};
   background-position: center;
   background-size: cover;
 
   h1 {
-    font-family: "Road Rage", sans-serif;
+    font-family: 'Road Rage', sans-serif;
     font-size: 80px;
     line-height: 60px;
-    color: #ffffff;
+    color: ${(props) => props.theme.white};
     position: absolute;
 
     height: 20%;
@@ -41,7 +39,7 @@ export const Banner = styled.div`
 
     span {
       display: block;
-      color: #fff;
+      color: ${(props) => props.theme.white};
       font-size: 20px;
     }
   }
@@ -58,13 +56,15 @@ export const CategoryButton = styled(Link)`
   text-decoration: none;
   cursor: pointer;
   background: none;
-  color:${(props) => (props.$isActiveCategory ? (props) => props.theme.purple :'#696969')};
+  color: ${(props) =>
+    props.$isActiveCategory ? (props) => props.theme.purple : '#696969'};
   font-size: 24px;
   font-weight: 500;
   padding-bottom: 5px;
-  line-height: 20px; 
+  line-height: 20px;
   border: none;
-  border-bottom: ${(props) => props.$isActiveCategory && ` 3px solid ${(props) => props.theme.purple}`};
+  border-bottom: ${(props) =>
+    props.$isActiveCategory && ` 3px solid ${(props) => props.theme.purple}`};
 
   &:hover {
     color: #ff2fd1;

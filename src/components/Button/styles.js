@@ -9,9 +9,9 @@ border-radius: 5px;
 background: ${(props) => props.theme.purple};
 font-family: "Road Rage", sans-serif;
 font-size: 30px;
-color: #fff;
+color: ${(props) => props.theme.white};
 
 &:hover {
-    background-color: #6f356f;
+    background-color: ${(props) => props.theme.similar};
 }
 `

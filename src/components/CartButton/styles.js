@@ -7,9 +7,9 @@ height: 52px;
 border: 0;
 border-radius: 5px;
 font-size: 30px;
-color: #ffffff;
+color: ${(props) => props.theme.white};
 
 &:hover {
-    background-color: #6f357c;
+    background-color: ${(props) => props.theme.secondDarkPurple};
 }
 `;
