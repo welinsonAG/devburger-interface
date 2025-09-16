@@ -69,7 +69,7 @@ margin-top: 50px;
 text-decoration: none;
 
 &:hover {
-    background-color:${(props) => props.theme.white};
+    background-color:${(props) => props.theme.AzulDelft};
 }
 `;
 

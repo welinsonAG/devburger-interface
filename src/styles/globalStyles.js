@@ -19,5 +19,9 @@ button, a{
 cursor: pointer;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
 `;
 export default globalStyles;

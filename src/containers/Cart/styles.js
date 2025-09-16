@@ -1,23 +1,24 @@
 import styled from 'styled-components';
-import Background from '../../assets/background.png';
 import Texture from '../../assets/texture.svg';
+import Background from "../../assets/background.png";
 
 export const Container = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-    url('${Background}');
-  background-size: cover;       /* cobre toda a tela */
-  background-repeat: no-repeat; /* evita repetição */
-  background-position: center;  /* centraliza */
-display: flex;
+  display: flex;
   flex-direction: column;
-
+  min-height: 100vh;
+  width: 100%;
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+    url(${Background});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+ 
 `;
 
+
 export const Banner = styled.div`
-  background: url('${Texture}');
+  background: url(${Texture});
   background-color: ${(props) => props.theme.mainBlack};
   background-size: cover;
   background-position: center;
@@ -52,6 +53,6 @@ export const Content = styled.div`
   width: 100%;
   max-width: 1280px;
   padding: 40px;
-  margin: 0 auto;
+  margin: 0px auto;
   gap: 40px;
 `;
