@@ -42,7 +42,7 @@ width:100%;
 max-width: 50%;
 
 background: url('${Background}');
-background-color:${(props) => props.theme.white}
+background-color:${(props) => props.theme.mainBlack};
 
 p{
     color:${(props) => props.theme.white};

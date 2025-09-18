@@ -41,10 +41,12 @@ export const Container = styled.div`
 `;
 
 export const CardImage = styled.img`
+
   height: 100px;
   position: absolute;
   top: -40px;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
+  
 `;
