@@ -6,7 +6,7 @@ import { formatPrice } from '../../utils/formatPrice';
 
 export function CardProduct({ product }) {
   const { putProductInCart } = useCart();
- console.log(product.url);
+ 
   return ( 
     <Container>
      

@@ -12,9 +12,14 @@ export function CategoriesCarousel() {
 
   useEffect(() => {
     async function loadCategories() {
+      try {
       const { data } = await api.get('/categories');
       setCategories(data);
-      console.log(data);
+
+       console.log("✅ Categorias:", data);
+    } catch (err) {
+      console.error("❌ Erro ao carregar categorias:", err.response?.data || err);
+    }
       
     }
     loadCategories();
