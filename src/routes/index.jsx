@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import UserLayout from '../layouts/UserLayout/index';
+import UserLayout from '../layouts/UserLayout';
+import { AdminLayout } from '../layouts/AdminLayout';
 import {
   Cart,
   Home,
@@ -13,26 +14,29 @@ import {
   EditProduct,
   Menu,
 } from '../containers';
-import { AdminLayout } from '../layouts/AdminLayout';
 
 export function Router() {
   return (
     <Routes>
+      {/* Rotas do usuário */}
       <Route path="/" element={<UserLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/cardapio" element={<Menu />} />
-        <Route path="/carrinho" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/complete" element={<CompletePayment />} />
-        <Route path="/confirmation" element={<CompletePayment />} />
+        <Route index element={<Home />} />
+        <Route path="cardapio" element={<Menu />} />
+        <Route path="carrinho" element={<Cart />} />
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="complete" element={<CompletePayment />} />
+        <Route path="confirmation" element={<CompletePayment />} />
       </Route>
 
-      <Route path="/admin" element={<AdminLayout />} />
-      <Route path="/admin/pedidos" element={<Orders />} />
-      <Route path="/admin/novo-produto" element={<NewProduct />} />
-      <Route path="/admin/editar-produto" element={<EditProduct />} />
-      <Route path="/admin/produtos" element={<Products />} />
+      {/* Rotas do admin (todas dentro do AdminLayout) */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="pedidos" element={<Orders />} />
+        <Route path="produtos" element={<Products />} />
+        <Route path="novo-produto" element={<NewProduct />} />
+        <Route path="editar-produto" element={<EditProduct />} />
+      </Route>
 
+      {/* Rotas públicas */}
       <Route path="/login" element={<Login />} />
       <Route path="/cadastro" element={<Register />} />
     </Routes>

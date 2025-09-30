@@ -15,7 +15,7 @@ export const Container = styled.div`
   }
   section {
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px;
     width: 100%;
     max-width: 1200px;
     width: 100%;
