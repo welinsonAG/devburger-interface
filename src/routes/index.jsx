@@ -33,7 +33,7 @@ export function Router() {
         <Route path="pedidos" element={<Orders />} />
         <Route path="produtos" element={<Products />} />
         <Route path="novo-produto" element={<NewProduct />} />
-        <Route path="editar-produto" element={<EditProduct />} />
+        <Route path="editar-produtos" element={<EditProduct />} />
       </Route>
 
       {/* Rotas públicas */}

@@ -6,73 +6,114 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Row } from './row';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../../../services/api';
-
-
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
-  };
-}
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
+import { orderStatusOptions } from './orderStatus';
+import { Filter, FilterOptions } from './styles';
 
 export function Orders() {
-  const [orders, serOrders] = useState([]);
+  const [orders, setOrders] = useState([]); // Backup of all orders
+  const [filteredOrders, setFilteredOrders] = useState([]); // os vaores que estão na tela
+  const [activeStatus, setActiveStatus] = useState(orderStatusOptions[0]);
+
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
     async function loadOrders() {
       const { data } = await api.get('orders');
 
-      loadOrders(data);
+      setOrders(data);
+      setFilteredOrders(data);
 
       console.log(data);
     }
     loadOrders();
   }, []);
 
+  function createData(order) {
+    return {
+      name: order.user.name,
+      orderId: order._id,
+      date: order.createdAt,
+      products: order.products,
+      status: order.status,
+    };
+  }
+
+  useEffect(() => {
+    const newsRows = filteredOrders.map((order) => createData(order));
+
+    setRows(newsRows);
+  }, [filteredOrders]);
+
+  function handleStatus(status) {
+    if (status.id === 0) {
+      setFilteredOrders(orders);
+    } else {
+      const newOrders = orders.filter((order) => order.status === status.value);
+
+      setFilteredOrders(newOrders);
+    }
+    setActiveStatus(status.id);
+  }
+
+  useEffect(() => {
+    if (activeStatus === 0) {
+      setFilteredOrders(orders);
+    } else {
+      const statusIndex = orderStatusOptions.findIndex(
+        (item) => item.id === activeStatus,
+      );
+
+      
+    if (statusIndex !== -1) {
+      const newFilteredOrders = orders.filter(
+        (order) => order.status === orderStatusOptions[statusIndex].value,
+      );
+      setFilteredOrders(newFilteredOrders);
+    }else {
+      setFilteredOrders(orders);
+    }
+    }
+  }, [orders, activeStatus]);
+
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <Filter>
+        {orderStatusOptions.map((status) => (
+          <FilterOptions
+            key={status.id}
+            onClick={() => handleStatus(status)}
+            $isactiveStatus={activeStatus === status.id}
+          >
+            {status.label}
+          </FilterOptions>
+        ))}
+      </Filter>
+
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>Pedido</TableCell>
+              <TableCell>Cliente</TableCell>
+              <TableCell>Data do Pedido</TableCell>
+              <TableCell>Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <Row
+                key={row.orderId}
+                row={row}
+                orders={orders}
+                setOrders={setOrders}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
