@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import UserLayout from '../layouts/UserLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
 import {
@@ -30,6 +30,7 @@ export function Router() {
 
       {/* Rotas do admin (todas dentro do AdminLayout) */}
       <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Navigate to="pedidos" />} />
         <Route path="pedidos" element={<Orders />} />
         <Route path="produtos" element={<Products />} />
         <Route path="novo-produto" element={<NewProduct />} />
