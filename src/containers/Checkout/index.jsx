@@ -13,8 +13,8 @@ export function Checkout() {
     const clientSecret = location.state?.clientSecret || localStorage.getItem('stripeClientSecret');
 
     useEffect(() => {
-        console.log('🎯 location.state:', location.state);
-         console.log('🎯 clientSecret (localStorage):', localStorage.getItem('stripeClientSecret'));
+        
+        localStorage.removeItem('stripeClientSecret');
     }, [location.state]);
 
     if (!clientSecret) {

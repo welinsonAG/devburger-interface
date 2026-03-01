@@ -84,7 +84,7 @@ export function Row({ row, setOrders, orders }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {console.log('Produtos do pedido:', row.products)}
+                
                   {row.products.map((product) => (
                     <TableRow key={product.id}>
                       <TableCell component="th" scope="row">
