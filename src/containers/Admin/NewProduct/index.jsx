@@ -58,7 +58,7 @@ export function NewProduct() {
     async function loadCategories() {
       const { data } = await api.get('/categories');
 
-      console.log(data);
+    
       setCategories(data);
     }
 

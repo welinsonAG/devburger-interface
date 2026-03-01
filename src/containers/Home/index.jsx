@@ -5,7 +5,7 @@ import { useUser } from "../../hooks/UserContext"
 
 export function Home(){
     
-console.log(useUser()); 
+
 
 
     return(

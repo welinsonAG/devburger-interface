@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+
 
 import { Container, Title, ContainerItems, CategoryButton } from './styles';
 import { api } from '../../services/api';
@@ -16,7 +17,7 @@ export function CategoriesCarousel() {
       const { data } = await api.get('/categories');
       setCategories(data);
 
-       console.log("✅ Categorias:", data);
+     
     } catch (err) {
       console.error("❌ Erro ao carregar categorias:", err.response?.data || err);
     }
@@ -57,12 +58,11 @@ export function CategoriesCarousel() {
         {categories.map((category) => (
           <ContainerItems key={category.id} $imageUrl={category.url}>
             <CategoryButton
-              onClick={() =>
-                navigate({
-                  pathname: '/cardapio',
-                  search: `?categoria=${category.id}`, 
-                })
-              }
+           
+                to={`/cardapio?category=${category.id}`} 
+                  
+                
+              
             >
               {category.name}
             </CategoryButton>

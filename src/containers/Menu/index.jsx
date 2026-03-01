@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { api } from "../../services/api";
 import { CardProduct } from "../../components/CardProduct";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,77 +14,53 @@ import {
 export function Menu() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const navigate = useNavigate();
   const { search } = useLocation();
 
-  // Pegando categoria da URL de forma segura
+  // 🔥 URL é a única fonte da verdade
   const queryParams = new URLSearchParams(search);
-  const categoryIdParam = queryParams.get("categoria");
+  const activeCategory = Number(queryParams.get("category")) || 0;
 
-  const initialCategory = categoryIdParam && !isNaN(categoryIdParam)
-    ? parseInt(categoryIdParam, 10)
-    : 0;
-
-  const [activeCategory, setActiveCategory] = useState(initialCategory);
-
-  // Carregar categorias e produtos
-useEffect(() => {
-  async function loadCategories() {
-    try {
-      const { data } = await api.get("/categories");
-      console.log("Categorias recebidas:", data);
-
-      const newCategories = [{ id: 0, name: "Todas" }, ...data];
-      setCategories(newCategories);
-    } catch (error) {
-      console.error("Erro ao carregar categorias:", error);
-      if (error.response?.status === 401) {
-        navigate("/login"); // redireciona se não tiver token válido
-      }
-    }
-  }
-
-  async function loadProducts() {
-    try {
-      const { data } = await api.get("/products");
-      console.log("Produtos recebidos:", data);
-
-      const newProducts = data.map((product) => ({
-        currencyValue: formatPrice(product.price),
-        ...product,
-      }));
-
-      setProducts(newProducts);
-    } catch (error) {
-      console.error("Erro ao carregar produtos:", error);
-      if (error.response?.status === 401) {
-        navigate("/login");
-      }
-    }
-  }
-
-  loadCategories();
-  loadProducts();
-}, [navigate]);
-  // Atualizar produtos filtrados quando muda categoria ou produtos
+  // 🔹 Carregar dados
   useEffect(() => {
-    if (activeCategory === 0) {
-      setFilteredProducts(products);
- 
-      console.log("Categoria ativa:", activeCategory); // Verifique a categoria ativa
-    } else {
-     console.log("Estrutura dos produtos:", products.map(product => product.category_id));
+    async function loadData() {
+      try {
+        const [{ data: categoriesData }, { data: productsData }] =
+          await Promise.all([
+            api.get("/categories"),
+            api.get("/products"),
+          ]);
 
-      const newFilteredProducts = products.filter(
-        (product) => +product.category_id === activeCategory
-      );
-      setFilteredProducts(newFilteredProducts);
+        setCategories([{ id: 0, name: "Todas" }, ...categoriesData]);
+
+        const formattedProducts = productsData.map(product => ({
+          ...product,
+          currencyValue: formatPrice(product.price),
+        }));
+
+        setProducts(formattedProducts);
+
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+        if (error.response?.status === 401) {
+          navigate("/login");
+        }
+      }
     }
+
+    loadData();
+  }, [navigate]);
+
+  // 🔥 Filtro derivado (sem useEffect, sem setState)
+  const filteredProducts = useMemo(() => {
+    if (activeCategory === 0) return products;
+
+    return products.filter(
+      product => +product.category_id === activeCategory
+    );
   }, [products, activeCategory]);
 
-  // Render
   return (
     <Container>
       <Banner>
@@ -95,20 +71,13 @@ useEffect(() => {
       </Banner>
 
       <CategoryMenu>
-        {categories.map((category) => (
+        {categories.map(category => (
           <CategoryButton
             key={category.id}
             $isActiveCategory={category.id === activeCategory}
-            onClick={() => {
-              navigate(
-                {
-                  pathname: "/cardapio",
-                  search: `?categoria=${category.id}`,
-                },
-                { replace: true }
-              );
-              setActiveCategory(category.id);
-            }}
+            onClick={() =>
+              navigate(`/cardapio?category=${category.id}`)
+            }
           >
             {category.name}
           </CategoryButton>

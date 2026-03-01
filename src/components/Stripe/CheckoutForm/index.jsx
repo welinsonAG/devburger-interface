@@ -64,8 +64,8 @@ export default function CheckoutForm() {
        clientSecret: clientSecret,
     });
 
-    console.log(paymentIntent);
-    console.log(error);
+
+   
 
     if (error) {
       setMessage(error.message);

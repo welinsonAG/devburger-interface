@@ -5,7 +5,7 @@ import Background from '../../assets/background.png';
 
 export const Container = styled.div`
   width: 100%;
-  min-height: 100v;
+  min-height: 100vh;
   background-color: ${(props) => props.theme.secondWhite};
   background:
     linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
@@ -57,14 +57,14 @@ export const CategoryButton = styled(Link)`
   cursor: pointer;
   background: none;
   color: ${(props) =>
-    props.$isActiveCategory ? (props) => props.theme.purple : '#696969'};
+    props.$isActiveCategory ? props.theme.purple : '#696969'};
   font-size: 24px;
   font-weight: 500;
   padding-bottom: 5px;
   line-height: 20px;
   border: none;
   border-bottom: ${(props) =>
-    props.$isActiveCategory && ` 3px solid ${(props) => props.theme.purple}`};
+    props.$isActiveCategory ? ` 3px solid ${props.theme.purple}` : 'none'};
 
   &:hover {
     color: #ff2fd1;

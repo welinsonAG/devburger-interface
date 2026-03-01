@@ -9,8 +9,7 @@ export function AdminLayout() {
   const user = storedUser ? JSON.parse(storedUser) : null;
 
   const isAdmin = user?.admin;
- console.log("USER:", user);
-console.log("ISADMIN:", isAdmin);
+
 
   return isAdmin ? (
     <Container>

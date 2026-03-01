@@ -15,7 +15,7 @@ import { Container, ProductImage, EditButton } from './styles';
 
 export function Products() {
   const [products, setProducts] = useState([]);
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     async function loadProducts() {
       const { data } = await api.get('/products');
@@ -33,9 +33,8 @@ export function Products() {
       return <XCircle color="#ff3205" size="26" />;
     }
   }
-  function editProduct(product, navigate) { 
- 
-    navigate("/admin/editar-produtos",{ state: { product } });
+  function editProduct(product, navigate) {
+    navigate('/admin/editar-produtos', { state: { product } });
   }
 
   return (
@@ -77,7 +76,6 @@ export function Products() {
           </TableBody>
         </Table>
       </TableContainer>
-      );
     </Container>
   );
 }

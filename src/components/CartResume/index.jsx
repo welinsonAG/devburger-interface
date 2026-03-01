@@ -35,7 +35,7 @@ export function CartResume() {
 
     try {
       const { data } = await api.post('/create-payment-intent', { products });
-      console.log('🛒 Resposta da API:', data);
+     
 
       localStorage.setItem('stripeClientSecret', data.clientSecret);
       navigate('/checkout', {
