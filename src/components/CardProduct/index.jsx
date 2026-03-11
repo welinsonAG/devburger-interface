@@ -5,11 +5,16 @@ import { CardImage, Container } from './styles';
 import { formatPrice } from '../../utils/formatPrice';
 
 export function CardProduct({ product }) {
+
+  console.log(product);
   const { putProductInCart } = useCart();
 
   return (
     <Container>
-      <CardImage src={product.url} alt={product.name} />
+      
+      
+      <CardImage src={product.images?.[0] || "/placeholder.png"}  alt={product.name}/>
+      
       <div>
         <p>{product.name}</p>
         <strong>{formatPrice(product.price)}</strong>

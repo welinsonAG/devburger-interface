@@ -77,7 +77,7 @@ export function EditProduct() {
     productformData.append('name', data.name);
     productformData.append('price', (data.price * 100));
     productformData.append('category_id', data.category.id);
-    productformData.append('file', data.file[0]);
+    productformData.append('images', data.file[0]);
     productformData.append('offer', (data.offer));
 
     await toast.promise(api.put(`/products/${product.id}`, productformData), {
