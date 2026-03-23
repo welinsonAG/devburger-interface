@@ -77,7 +77,7 @@ export function EditProduct() {
     productformData.append('name', data.name);
     productformData.append('price', (data.price * 100));
     productformData.append('category_id', data.category.id);
-    productformData.append('images', data.file[0]);
+    productformData.append('images', data.images[0]);
     productformData.append('offer', (data.offer));
 
     await toast.promise(api.put(`/products/${product.id}`, productformData), {
@@ -120,12 +120,12 @@ export function EditProduct() {
             <ImageIcon />
             <Input
               type="file"
-              {...register('file')}
-              accept="image/png, image/jpeg"
+              {...register('images')}
+              accept="image/png, image/jpeg, image/jpg, image/webp"
               onChange={(value) => {
                 setFileName(value.target.files[0]?.name);
 
-                register('file').onChange(value);
+                register('images').onChange(value);
               }}
             />
 

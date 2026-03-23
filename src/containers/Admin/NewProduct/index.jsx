@@ -22,29 +22,23 @@ import { toast } from 'react-toastify';
 
 
 const schema = yup.object({
-  name: yup.string().required('Digite o nome do produto'),
-  price: yup
-    .number()
-    .positive()
-    .required('Digite o preço do produto')
-    .typeError('Digite um valor númerico'),
-  category: yup.object().required('Escolha uma categoria'),
-  Offer: yup.boolean(),
-  file: yup
-    .mixed()
-    .test('required', 'Envie uma imagem do produto', (value) => {
-      return value && value.length > 0;
-    })
+  images: yup
+  .mixed()
+  .test('required', 'Envie uma imagem do produto', (value) => {
+    return value && value.length > 0;
+  })
+ 
     .test('fileSize', 'Carregue uma imagem de no máximo 5MB ', (value) => {
       return value && value.length > 0 && value[0].size <= 5000000;
     })
-    .test('type', 'Tipo de arquivo válido apenas JPG, JPEG e PNG', (value) => {
+    .test('type', 'Tipo de arquivo válido apenas JPG, JPEG e PNG, WebP', (value) => {
       return (
         value &&
         value.length > 0 &&
         (value[0].type === 'image/jpeg' ||
           value[0].type === 'image/png' ||
-          value[0].type === 'image/jpg')
+          value[0].type === 'image/jpg'||
+          value[0].type === 'image/webp')
       );
     }),
 });
@@ -80,7 +74,7 @@ export function NewProduct() {
     productformData.append('name', data.name);
     productformData.append('price', data.price * 100);
     productformData.append('category_id', data.category.id);
-    productformData.append('file', data.file[0]);
+    productformData.append('images', data.images[0]);
     productformData.append('offer', data.offer);
 
     await toast.promise(api.post('/products', productformData), {
@@ -114,19 +108,19 @@ export function NewProduct() {
             <ImageIcon />
             <Input
               type="file"
-              {...register('file')}
-              accept="image/png, image/jpeg"
+              {...register('images')}
+              accept="image/png, image/jpeg, image/jpg, image/webp"
               onChange={(value) => {
                 setFileName(value.target.files[0]?.name);
 
-                register('file').onChange(value);
+                register('images').onChange(value);
               }}
             />
 
             {fileName || 'Upload Imagem do Produto'}
           </LabelUpload>
 
-          <ErrorMessage>{errors?.file?.message}</ErrorMessage>
+          <ErrorMessage>{errors?.images?.message}</ErrorMessage>
         </InputGroup>
 
         <InputGroup>

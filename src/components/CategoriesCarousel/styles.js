@@ -44,18 +44,21 @@ margin-top:20px;
 `;
 
 export const ContainerItems = styled.div`
-background: url(${props => props.$imageUrl});
-background-position:center;
-background-size: cover;
+  background-image: url(${props => props.$imageUrl});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-display:flex;
-align-items: center;
-padding: 20px 10px;
-width: 100%;
-height: 250px;
-border-radius: 20px;
+  padding: 20px 10px;
+  width: 100%;
+  height: 250px;
 
+  border-radius: 20px;
+  overflow: hidden;
 `;
 
 export const CategoryButton = styled(Link)`

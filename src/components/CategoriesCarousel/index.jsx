@@ -56,7 +56,9 @@ export function CategoriesCarousel() {
         itemClass="carousel-item"
       >
         {categories.map((category) => (
-          <ContainerItems key={category.id} $imageUrl={category.url}>
+         
+          <ContainerItems key={category.id} $imageUrl={category.path?.startsWith('http')? category.path : `/default-category.png` }>
+           
             <CategoryButton
            
                 to={`/cardapio?category=${category.id}`} 
@@ -67,6 +69,7 @@ export function CategoriesCarousel() {
               {category.name}
             </CategoryButton>
           </ContainerItems>
+          
         ))}
       </Carousel>
     </Container>

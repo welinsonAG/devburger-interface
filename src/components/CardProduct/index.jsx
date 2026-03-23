@@ -5,24 +5,33 @@ import { CardImage, Container } from './styles';
 import { formatPrice } from '../../utils/formatPrice';
 
 export function CardProduct({ product }) {
-
-  console.log(product);
+console.log(product)
   const { putProductInCart } = useCart();
+
+  
+
+  const images = Array.isArray(product.images)
+  ? product.images
+  : [];
+
+const imageUrl = product.images?.[0] || "/placeholder.png";
 
   return (
     <Container>
-      
-      
-      <CardImage src={product.images?.[0] || "/placeholder.png"}  alt={product.name}/>
-      
+
+      <CardImage
+        src={imageUrl || "/placeholder.png"}
+        alt={product.name}
+      />
+
       <div>
         <p>{product.name}</p>
         <strong>{formatPrice(product.price)}</strong>
       </div>
-      <CartButton onClick={() => putProductInCart(product)}></CartButton>
+
+      <CartButton onClick={() => putProductInCart(product)} />
+
     </Container>
   );
 }
-CardProduct.propTypes = {
-  product: PropTypes.object.isRequired,
-};
+
