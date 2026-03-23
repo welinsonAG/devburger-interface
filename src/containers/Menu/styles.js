@@ -74,10 +74,9 @@ export const CategoryButton = styled(Link)`
 
 export const ProductsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   padding: 40px;
   gap: 60px;
-  justify-content: center;
   max-width: 1280px;
   margin: 50px auto;
 `;

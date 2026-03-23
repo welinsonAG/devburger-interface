@@ -8,19 +8,17 @@ export function CardProduct({ product }) {
 console.log(product)
   const { putProductInCart } = useCart();
 
+  const imageUrl = product.images?.[0] || "/placeholder.png";
   
 
-  const images = Array.isArray(product.images)
-  ? product.images
-  : [];
 
-const imageUrl = product.images?.[0] || "/placeholder.png";
 
   return (
     <Container>
 
       <CardImage
-        src={imageUrl || "/placeholder.png"}
+      
+        src={imageUrl} 
         alt={product.name}
       />
 

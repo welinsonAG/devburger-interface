@@ -6,7 +6,22 @@ width: 80px;
 border-radius:16px;
  object-fit: cover;
 `;
+export const CardImage = styled.img`
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+`;
+export const Container = styled.div`
+  width: 250px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border:50px solid red;
 
+ 
+`;
 export const  ButtonGroup= styled.div`
 display: flex;
 align-items: center;
