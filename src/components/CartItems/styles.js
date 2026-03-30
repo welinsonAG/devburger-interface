@@ -10,7 +10,7 @@ export const CardImage = styled.img`
   width: 100%;
   height: 150px;
   object-fit: cover;
-  display: block;
+  border-radius: 12px;
 `;
 export const Container = styled.div`
   width: 250px;
@@ -18,9 +18,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border:50px solid red;
 
- 
 `;
 export const  ButtonGroup= styled.div`
 display: flex;

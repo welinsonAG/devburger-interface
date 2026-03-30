@@ -3,14 +3,24 @@ import PropTypes from 'prop-types';
 import { CartButton } from '../CartButton';
 import { CardImage, Container } from './styles';
 import { formatPrice } from '../../utils/formatPrice';
+import { Placeholder } from 'phosphor-react';
+import { memo } from 'react';
 
-export function CardProduct({ product }) {
-console.log(product)
+export const CardProduct = memo( function CardProduct({ product }) {
+
+
+
   const { putProductInCart } = useCart();
 
-  const imageUrl = product.images?.[0] || "/placeholder.png";
-  
 
+const imageUrl =
+  product?.image ||
+  product?.images?.[0]?.full ||
+  product?.images?.[0]?.medium ||
+  product?.images?.[0]?.thumb ||
+  "/placeholder.png";
+  
+console.log(imageUrl);
 
 
   return (
@@ -20,6 +30,10 @@ console.log(product)
       
         src={imageUrl} 
         alt={product.name}
+        onError={(e) =>{
+          e.target.onerro = null;
+          e.target.src = '/placeholder.png'
+        }}
       />
 
       <div>
@@ -33,3 +47,4 @@ console.log(product)
   );
 }
 
+);

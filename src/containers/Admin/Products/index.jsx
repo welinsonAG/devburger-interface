@@ -17,6 +17,8 @@ export function Products() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
+  
+    
     async function loadProducts() {
       const { data } = await api.get('/products');
 
@@ -26,6 +28,15 @@ export function Products() {
     loadProducts();
   }, []);
 
+  function getImage(product) {
+  const img = product.images?.[0];
+
+  if (!img) return '/placeholder.png';
+
+  if (typeof img === 'string') return img;
+
+  return img.full || img.medium || img.thumb || '/placeholder.png';
+}
   function isOffer(offer) {
     if (offer) {
       return <CheckCircle color="#61A120" size="26" />;
@@ -52,9 +63,12 @@ export function Products() {
           </TableHead>
           <TableBody>
             {products.map((product) => (
+             
+              
               <TableRow
                 key={product.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              
               >
                 <TableCell component="th" scope="row">
                   {product.name}
@@ -64,7 +78,15 @@ export function Products() {
                 </TableCell>
                 <TableCell align="center">{isOffer(product.offer)}</TableCell>
                 <TableCell align="center">
-                  <ProductImage src={product.url} />
+  <ProductImage
+  src={getImage(product)}
+   onLoad={(e) => e.target.classList.add('loaded')}
+  
+  onError={(e) => {
+    e.target.onerror = null;
+    e.target.src = '/placeholder.png';
+  }}
+/>
                 </TableCell>
                 <TableCell align="center">
                   <EditButton onClick={() => editProduct(product, navigate)}>
