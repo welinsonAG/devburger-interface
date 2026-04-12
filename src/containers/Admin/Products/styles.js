@@ -10,7 +10,8 @@ export const ProductImage = styled.img`
 
   background: #eee;
   border-radius: 15px;
-  padding: 12px;
+
+  display: block;
    
 `;
 

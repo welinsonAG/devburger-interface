@@ -1,27 +1,26 @@
 import { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
-import "react-multi-carousel/lib/styles.css";
-import { useNavigate} from 'react-router-dom';
-
+import 'react-multi-carousel/lib/styles.css';
+import { useNavigate } from 'react-router-dom';
 
 import { Container, Title, ContainerItems, CategoryButton } from './styles';
 import { api } from '../../services/api';
 
 export function CategoriesCarousel() {
   const [categories, setCategories] = useState([]);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadCategories() {
       try {
-      const { data } = await api.get('/categories');
-      setCategories(data);
-
-     
-    } catch (err) {
-      console.error("❌ Erro ao carregar categorias:", err.response?.data || err);
-    }
-      
+        const { data } = await api.get('/categories');
+        setCategories(data);
+      } catch (err) {
+        console.error(
+          '❌ Erro ao carregar categorias:',
+          err.response?.data || err,
+        );
+      }
     }
     loadCategories();
   }, []);
@@ -45,6 +44,18 @@ export function CategoriesCarousel() {
     },
   };
 
+function getCategoryImageUrl(category) {
+  console.log('CATEGORY NA FUNÇÃO:', category);
+
+  const path = category?.path?.trim();
+
+  if (path && path.startsWith('http')) {
+    return path;
+  }
+
+  return null;
+}
+
   return (
     <Container>
       <Title>Categorias</Title>
@@ -55,22 +66,25 @@ export function CategoriesCarousel() {
         partialVisbile={false}
         itemClass="carousel-item"
       >
-        {categories.map((category) => (
-         
-          <ContainerItems key={category.id} $imageUrl={category.path?.startsWith('http')? category.path : `/default-category.png` }>
-           
-            <CategoryButton
-           
-                to={`/cardapio?category=${category.id}`} 
-                  
-                
-              
-            >
-              {category.name}
-            </CategoryButton>
-          </ContainerItems>
-          
-        ))}
+       {categories.map((category, index) => {
+  const imageUrl = getCategoryImageUrl(category);
+  
+  console.log('FINAL URL:', imageUrl); // 👈 TESTE
+
+  return (
+  <ContainerItems 
+      key={`${category.id}-${index}`} 
+      $imageUrl={imageUrl}
+    >
+   
+  
+      
+  <CategoryButton to={`/cardapio?category=${category.id}`}>
+    {category.name}
+  </CategoryButton>
+</ContainerItems>
+  );
+})}
       </Carousel>
     </Container>
   );

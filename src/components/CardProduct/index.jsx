@@ -8,7 +8,7 @@ import { memo } from 'react';
 
 export const CardProduct = memo( function CardProduct({ product }) {
 
-
+console.log(product);
 
   const { putProductInCart } = useCart();
 

@@ -44,32 +44,53 @@ margin-top:20px;
 `;
 
 export const ContainerItems = styled.div`
-  background-image: url(${props => props.$imageUrl});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background:${({ $imageUrl }) => `url(${ $imageUrl })no-repeat center center`};
+    background-size: cover;
+    width: 100%;
+    height: 300px;
+  
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px 10px;
-  width: 100%;
-  height: 250px;
-
-  border-radius: 20px;
-  overflow: hidden;
+    &::before{
+        content:'';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 50%;
+        border-radius: 50px;
+       
+      
+    }
 `;
 
 export const CategoryButton = styled(Link)`
 color:${(props) => props.theme.white};
 background-color:rgba(0, 0, 0, 0.5 );
-padding: 10px 25px;
+padding: 10px 18px;
 border-radius:30px;
-font-size: 22.5px;
+font-size: 18px;
 font-weight: 500;
-margin-top: 50px;
+margin-top: 45px;
 text-decoration: none;
+
+max-width: 100%;
+white-space: normal;
+word-break: break-word;
+overflow: hidden;
+
+
+text-align: center;
+
+
 
 &:hover {
     background-color:${(props) => props.theme.AzulDelft};
