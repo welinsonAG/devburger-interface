@@ -52,7 +52,11 @@ export function Products() {
     navigate('/admin/editar-produtos', { state: { product } });
   }
   if (loading) {
-    return <p>Carregando produtos...</p>;
+    return (
+      <Container>
+        <p>Carregando produtos...</p>
+      </Container>
+    );
   }
   return (
     <Container>
@@ -69,43 +73,64 @@ export function Products() {
           </TableHead>
 
           <TableBody>
-            {products?.length > 0 &&
-              products.map((product) => {
-                console.log(product.image)
-                console.log(product.images)
+            {products.map((product) => {
+              const imageUrl =
+                product.images?.[0]?.full ||
+                product.images?.[0]?.medium ||
+                product.images?.[0]?.thumb ||
+                product.image ||
+                'https://via.placeholder.com/80';
 
-                return (
-                  <TableRow
-                    key={product.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {product.name}
-                    </TableCell>
-                    <TableCell align="center">
-                      {formatPrice(product.price)}
-                    </TableCell>
-                    <TableCell align="center">
-                      {isOffer(product.offer)}
-                    </TableCell>
-                    <TableCell align="center">
-  <ProductImage
-  src={product.images?.[0]?.full || product.image || 'https://via.placeholder.com/80'}
-/>
+              return (
+                <TableRow
+                  key={product.id}
+                  key={product.id}
+                  hover
+                  sx={{ cursor: 'pointer' }}
+                >
+                  <TableCell component="th" scope="row">
+                    {product.name}
+                  </TableCell>
 
+                  <TableCell align="center">
+                    {formatPrice(product.price)}
+                  </TableCell>
 
-                    </TableCell>
-                    <TableCell align="center">
-                      <EditButton
-                        className="loaded"
-                        onClick={() => editProduct(product, navigate)}
-                      >
-                        <Pencil />
-                      </EditButton>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                  <TableCell align="center">
+                    {product.offer ? (
+                      <span style={{ color: '#61A120', fontWeight: 'bold' }}>
+                        Em oferta
+                      </span>
+                    ) : (
+                      <span style={{ color: '#999' }}>Normal</span>
+                    )}
+                  </TableCell>
+
+                  <TableCell align="center">
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <ProductImage
+                        src={imageUrl}
+                        alt={product.name}
+                        onError={(e) => {
+                          e.target.src = 'https://via.placeholder.com/80';
+                        }}
+                      />
+                    </div>
+                  </TableCell>
+
+                  <TableCell align="center">
+                    <EditButton
+                      className="loaded"
+                      onClick={(e) =>
+                        e.stopPropagation() && editProduct(product, navigate)
+                      }
+                    >
+                      <Pencil size={20} />
+                    </EditButton>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
