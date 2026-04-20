@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export const api = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: 'https://devburger-api-5t5d.onrender.com',
 });
 
 // Interceptor para incluir o token de autenticação nas requisições
