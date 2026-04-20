@@ -84,7 +84,7 @@ export function Products() {
               return (
                 <TableRow
                   key={product.id}
-                  key={product.id}
+                
                   hover
                   sx={{ cursor: 'pointer' }}
                 >
