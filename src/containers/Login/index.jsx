@@ -45,48 +45,43 @@ export function Login() {
 
 const onSubmit = async (data) => {
   try {
-    const request = api.post('/sessions', {
+    console.log('📤 ENVIANDO LOGIN...');
+
+    const response = await api.post('/sessions', {
       email: data.email,
       password: data.password,
     });
 
-    const response = await toast.promise(request, {
-      pending: 'Verificando seus dados',
-      success: 'Seja Bem Vindo 👌',
-      error: 'Email ou Senha Incorretos 🤯',
-    });
+    console.log('📥 RESPOSTA BRUTA:', response);
+    console.log('📥 DATA:', response.data);
 
     const dataResponse = response.data;
 
-    // 🔥 pega token de forma segura
     const token = dataResponse.token || dataResponse.auth?.token;
 
-    if (!token) {
-      console.log('RESPOSTA DO BACKEND:', dataResponse);
-      throw new Error('Token não veio do backend');
-    }
+    console.log('🔑 TOKEN EXTRAÍDO:', token);
 
     const userData = {
       user: dataResponse.user || dataResponse,
       token,
     };
 
+    console.log('💾 SALVANDO NO LOCALSTORAGE:', userData);
+
     localStorage.setItem(
       'devburger:userData',
       JSON.stringify(userData)
     );
 
+    console.log(
+      '✔ LOCALSTORAGE AGORA:',
+      localStorage.getItem('devburger:userData')
+    );
+
     putUserData(userData);
 
-    if (userData.user?.admin) {
-      navigate('/admin/pedidos');
-    } else {
-      navigate('/');
-    }
-
   } catch (error) {
-    console.error('Erro ao logar:', error);
-    toast.error('Erro inesperado! Tente novamente.');
+    console.log('❌ ERRO REAL:', error.response || error);
   }
 };
   return (
