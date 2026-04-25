@@ -5,10 +5,14 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const userData = localStorage.getItem('devburger:userData');
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  if (userData) {
+    const parsed = JSON.parse(userData);
+
+  
+      config.headers.Authorization = `Bearer ${parsed.token}`;
+    
   }
 
   return config;
@@ -18,7 +22,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('devburger:userData');
       window.location.href = '/login';
     }
 
