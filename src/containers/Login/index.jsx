@@ -43,40 +43,47 @@ export function Login() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const { data: userData } = await toast.promise(
-        api.post('/sessions', {
-          email: data.email,
-          password: data.password,
-        }),
+const onSubmit = async (data) => {
+  try {
+    console.log('📤 ENVIANDO LOGIN...');
 
-        {
-          pending: 'Verificando seus dados',
-          success: {
-            render() {
-              setTimeout(() => {
-                if (userData?.admin) {
-                  navigate('/admin/pedidos');
-                } else {
-                  navigate('/');
-                }
-              }, 2000);
-              return 'Seja Bem Vindo (a) 👌';
-            },
-          },
+    const response = await api.post('/sessions', {
+      email: data.email,
+      password: data.password,
+    });
 
-          error: 'Email ou Senha Incorretos 🤯',
-        },
-      );
+    console.log('📥 RESPOSTA BRUTA:', response);
+    console.log('📥 DATA:', response.data);
 
-      putUserData(userData);
-    } catch (error) {
-      console.error('Erro inesperado ao tentar logar:', error);
-      toast.error('Erro inesperado! Tente novamente.');
-    }
-  };
+    const dataResponse = response.data;
 
+    const token = dataResponse.token || dataResponse.auth?.token;
+
+    console.log('🔑 TOKEN EXTRAÍDO:', token);
+
+    const userData = {
+      user: dataResponse.user || dataResponse,
+      token,
+    };
+
+    console.log('💾 SALVANDO NO LOCALSTORAGE:', userData);
+
+    localStorage.setItem(
+      'devburger:userData',
+      JSON.stringify(userData)
+    );
+
+    console.log(
+      '✔ LOCALSTORAGE AGORA:',
+      localStorage.getItem('devburger:userData')
+    );
+
+    putUserData(userData);
+
+  } catch (error) {
+    console.log('❌ ERRO REAL:', error.response || error);
+  }
+};
   return (
     <Container>
       <LeftContainer>
