@@ -43,40 +43,38 @@ export function Login() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const { data: userData } = await toast.promise(
-        api.post('/sessions', {
-          email: data.email,
-          password: data.password,
-        }),
+const onSubmit = async (data) => {
+  try {
+    const request = api.post('/sessions', {
+      email: data.email,
+      password: data.password,
+    });
 
-        {
-          pending: 'Verificando seus dados',
-          success: {
-            render() {
-              setTimeout(() => {
-                if (userData?.admin) {
-                  navigate('/admin/pedidos');
-                } else {
-                  navigate('/');
-                }
-              }, 2000);
-              return 'Seja Bem Vindo (a) 👌';
-            },
-          },
+    const response = await toast.promise(request, {
+      pending: 'Verificando seus dados',
+      success: 'Seja Bem Vindo (a) 👌',
+      error: 'Email ou Senha Incorretos 🤯',
+    });
 
-          error: 'Email ou Senha Incorretos 🤯',
-        },
-      );
+    const userData = response.data;
 
-      putUserData(userData);
-    } catch (error) {
-      console.error('Erro inesperado ao tentar logar:', error);
-      toast.error('Erro inesperado! Tente novamente.');
+    // 🔥 AGORA SIM SEGURO
+    localStorage.setItem('token', userData.token);
+
+    putUserData(userData);
+
+    // navegação fora do toast
+    if (userData.admin) {
+      navigate('/admin/pedidos');
+    } else {
+      navigate('/');
     }
-  };
 
+  } catch (error) {
+    console.error('Erro inesperado ao tentar logar:', error);
+    toast.error('Erro inesperado! Tente novamente.');
+  }
+};
   return (
     <Container>
       <LeftContainer>
