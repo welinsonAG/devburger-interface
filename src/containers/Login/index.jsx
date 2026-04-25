@@ -52,26 +52,40 @@ const onSubmit = async (data) => {
 
     const response = await toast.promise(request, {
       pending: 'Verificando seus dados',
-      success: 'Seja Bem Vindo (a) 👌',
+      success: 'Seja Bem Vindo 👌',
       error: 'Email ou Senha Incorretos 🤯',
     });
 
-    const userData = response.data;
+    const dataResponse = response.data;
 
-    // 🔥 AGORA SIM SEGURO
-    localStorage.setItem('token', userData.token);
+    // 🔥 pega token de forma segura
+    const token = dataResponse.token || dataResponse.auth?.token;
+
+    if (!token) {
+      console.log('RESPOSTA DO BACKEND:', dataResponse);
+      throw new Error('Token não veio do backend');
+    }
+
+    const userData = {
+      user: dataResponse.user || dataResponse,
+      token,
+    };
+
+    localStorage.setItem(
+      'devburger:userData',
+      JSON.stringify(userData)
+    );
 
     putUserData(userData);
 
-    // navegação fora do toast
-    if (userData.admin) {
+    if (userData.user?.admin) {
       navigate('/admin/pedidos');
     } else {
       navigate('/');
     }
 
   } catch (error) {
-    console.error('Erro inesperado ao tentar logar:', error);
+    console.error('Erro ao logar:', error);
     toast.error('Erro inesperado! Tente novamente.');
   }
 };
