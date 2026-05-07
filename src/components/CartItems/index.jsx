@@ -36,7 +36,13 @@ export function CartItems() {
             <Table.Tr key={product.id}>
               
               <Table.Td>
-                <ProductImage src={product.url} alt={product.name} />
+                <ProductImage   src={
+    product?.image ||
+    product?.images?.[0]?.full ||
+    product?.images?.[0]?.medium ||
+    product?.images?.[0]?.thumb ||
+    '/placeholder.png'
+  } alt={product.name} />
               </Table.Td>
               <Table.Td>{product.name}</Table.Td>
               <Table.Td>{formatPrice(product.quantity * product.price)}</Table.Td>

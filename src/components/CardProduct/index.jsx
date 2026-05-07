@@ -8,27 +8,16 @@ import { memo } from 'react';
 
 export const CardProduct = memo( function CardProduct({ product }) {
 
-console.log(product.images);
-console.log(typeof product.images);
+console.log(product);
 
   const { putProductInCart } = useCart();
 
 
-  let parsedImages = [];
-
-try {
-  parsedImages =
-    typeof product.images === 'string'
-      ? JSON.parse(product.images)
-      : product.images || [];
-} catch {
-  parsedImages = [];
-}
 const imageUrl =
   product?.image ||
-  parsedImages?.[0]?.full ||
-  parsedImages?.[0]?.medium ||
-  parsedImages?.[0]?.thumb ||
+  product?.images?.[0]?.full ||
+  product?.images?.[0]?.medium ||
+  product?.images?.[0]?.thumb ||
   "/placeholder.png";
   
 console.log(imageUrl);
