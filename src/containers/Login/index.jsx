@@ -62,7 +62,7 @@ export function Login() {
                 } else {
                   navigate('/');
                 }
-              }, 2000);
+              }, 2000);N
               return 'Seja Bem Vindo (a) 👌';
             },
           },
